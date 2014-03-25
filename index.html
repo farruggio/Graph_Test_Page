@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Test page WBS</title>
+
+        
+        <script src="src/dist/vivagraph.js"></script>
+
+
+ <link rel="stylesheet" href="src/css/slick.grid.css" type="text/css"/>
+  <link rel="stylesheet" href="src/controls/slick.pager.css" type="text/css"/>
+  <link rel="stylesheet" href="src/controls/slick.columnpicker.css" type="text/css"/>
+  <link rel="stylesheet" href="src/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css"/>
+  <link rel="stylesheet" href="src/css/examples.css" type="text/css"/>
+  <link rel="stylesheet" href="src/lib/style.css"> 
+  
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+       
+        <style type='text/css'>
+
+ * {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+   body {
+          width: 100%;
+          height: 650px;
+        margin: 8px;
+        background:grey;
+        overflow-x:hidden; 
+        
+        }
+  .li{
+    padding: 15px
+  }          
+           
+             #grid {
+
+        position: relative;
+          bottom: 0;
+          height: 10%;
+      }
+
+      .slick-row:hover {
+          font-weight: bold;
+          color: #069;
+      }
+
+        .cell-title {
+            font-weight: bold;
+        }
+
+        .cell-effort-driven {
+            text-align: center;
+        }
+
+        .cell-selection {
+          border-right-color: silver;
+            border-right-style: solid;
+          background: #f5f5f5;
+          color: gray;
+          text-align: right;
+            font-size: 10px;
+        }
+
+        .slick-row.selected .cell-selection {
+          background-color: transparent; /* show default selected row background */
+        }
+           .slick-viewport {
+          /*overflow-x: hidden !important;*/
+      }
+        .grid_all{
+          
+          bottom:0;
+          width:70%;
+          margin-left: 15%;
+          margin-right: 15%;
+          margin-bottom: 10px;
+          margin-top: 5px;
+          
+        }
+      
+
+      .button { 
+        position: absolute;
+        float:left;
+            margin-top: 25px;
+             margin-left: 20px;
+             z-index: 2;
+      cursor: pointer; }
+
+      .legend{
+        
+          position: absolute;
+          height:100%;
+          
+          width:6%;
+          margin-left: 82%;
+          margin-top: 25px;
+          z-index: 2;
+          }
+          .zoomer{
+            position: absolute;
+            margin-top: 35px;
+             margin-left: 20%;
+             z-index: 2;
+          }
+
+        #circle {
+          position: relative;
+          width: 40px;
+            height: 40px;
+            border-radius: 50%;
+              color:black;
+            margin: 4px;
+           
+        }
+        .innerTEXT{
+          width: 20px;
+          color: white;
+            position:relative;
+            top:10px;
+            left:45px;
+        }
+
+          .control{
+            
+              position: absolute;
+              margin-left: 82%;
+              height:100%;
+              width:15%;
+              padding:2px;
+/*border-style:solid;
+              border-width:1px;*/
+            z-index: 3;
+            background: black;
+            }
+
+            .grafo{
+              position:relative; 
+              width:100%;
+              height:90%;
+              margin-left: 20px;
+              overflow-y:hidden;
+            }  
+
+        #webgl {
+            position: absolute;
+              
+              width: 90%;
+              height: 100%;
+              color: #000;
+              background: black;
+              padding-bottom: 200px;
+              margin-bottom: 200px;
+
+              
+            }
+            
+  
+
+            #ciccio{
+              position: absolute;
+              float:left;
+              position: static;
+              height:100%;
+              width:80px !important;
+              margin-left: 91%;
+              overflow: scroll;
+              z-index: 3; 
+              background:black;
+              
+              padding-left: 2px;
+              
+            } 
+          .controller{
+            width: 70%;
+            margin-left: 15%;
+            margin-right: 15%;
+          }
+                    
+
+    </style>
+    </head>
+    <body>
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+<script src="src/js/JSON2CSV.js"></script>
+<script src="src/lib/firebugx.js"></script>
+
+<script src="src/lib/jquery-1.7.min.js"></script>
+<script src="src/lib/jquery-ui-1.8.16.custom.min.js"></script>
+<script src="src/lib/jquery.event.drag-2.2.js"></script>
+
+<script src="src/js/slick.core.js"></script>
+<script src="src/js/slick.formatters.js"></script>
+<script src="src/js/slick.editors.js"></script>
+<script src="src/plugins/slick.rowselectionmodel.js"></script>
+<script src="src/js/slick.grid.js"></script>
+<script src="src/js/slick.dataview.js"></script>
+<script src="src/controls/slick.pager.js"></script>
+<script src="src/controls/slick.columnpicker.js"></script>
+<script src="src/js/d3.v3.min.js"></script>
+<script src="src/js/levaduplicati.js"></script>
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="src/js/buildCircleNodeShader.js"></script>
+<script src="src/js/WebglCircle.js"></script>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="src/dist/vivagraph.js"></script>
+<!--<script src="creagrafo.js"></script>-->
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="src/lib/firebugx.js"></script>
+<script src="src/lib/jquery-1.7.min.js"></script>
+<script src="src/lib/jquery-ui-1.8.16.custom.min.js"></script>
+<script src="src/lib/jquery.event.drag-2.2.js"></script>
+
+
+
+
+
+
+<div class="grafo">
+
+
+
+
+
+
+<div style="color: white; position:absolute; margin-left:20px; margin-top:20px" >
+      </div>
+
+
+
+
+
+
+    <div class="legend" id="toggleText" style="display: none ">
+    <div id="circle" style="background:#FF0000">
+
+
+    <span class="innerTEXT">FC>3</span></div>
+
+    <div id="circle" style="background:#FF0055">
+    
+    <span class="innerTEXT">FC>2</span></div>
+    <div id="circle" style="background:#FF0099">
+    
+    <span class="innerTEXT">FC>1.5</span></div>
+    
+  <div id="circle" style="background:#008B00">
+    
+    <span class="innerTEXT">FC<-1.5</span></div>
+  <div id="circle" style="background:#00CD00">
+    <span class="innerTEXT">FC<-2</span></div>
+    <div id="circle" style="background:#00FF00">
+    <span class="innerTEXT">FC<-3</span></div>
+    <!--<div id="circle" style="background:black;border: solid 2px green">
+    <span class="innerTEXT" style="top:3px">Gene in list</span></div>-->
+    <div id="circle" style="top:50px;background:yellow"><span class="innerTEXT"style="top:-40px;">Gene select from table, double click to deselect</span></div>
+
+</div>
+
+<div id="webgl"></div>
+<div id='ciccio'style="color: white;">Selected: </div>
+
+
+</div>
+<div style="margin-left:20px;display:inline-block;">
+<input type="button" value="Play layout" onclick="renderer.resume()">
+<input type="button" value="Stop layout" onclick="renderer.pause()">
+<input id="displayText" type="button" value="Show Legend" onclick="javascript:toggle();">
+</div>
+
+  <div class="grid_all" style="widht:100%";>
+  <div class="grid-header"style="widht:100%";><label>Dati</label>         
+  <div id="slider"></div></div>
+  <div id="myGrid"style="widht:100%" ></div>
+  <div id="pager"style="widht:100%" ></div>
+
+
+
+<div class="options-panel"> <b>Search gene by Symbol:</b><input type=text id="txtSearch"><button id="download" onclick="DownloadJSON2CSV(datasss)">Download CSV all dataset</button>
+<input type="button" value="Show table neighbors" onclick="gridneigh(novadata);">
+<button id="download" onclick="DownloadJSON2CSV(novadata)">Download CSV neighbors</button>
+<input type="button" value="Reset All Data Table" onclick="gridneigh(datasss);"/>
+</div>
+
+</div>
+
+<div class="controller"style="margin-top:-5px">
+<div class="options-panel">
+
+
+<form id='centerForm' style="display:inline-block;font-weight:bold;";>
+        Delete Gene by Symbol:<input type='text' id='nodeid'/><input type='submit' value='Delete'/></form>
+
+
+        <form id='res' style='display:inline'><input id='res' type='submit' value='Deselect Data'></form>
+<form id='lis'style='display:inline'><input type='submit' value='Find Neighbors'></form>
+<form id='vicvic' style='display:inline'><input type='submit' value='Find 2Neighbors'></form>
+
+
+
+<form id='nuovoG'style='display:inline'><input type='submit' value='New Graph'></form>
+<!--<form id='color'style='display:inline' ><input id='color' type='submit' value='Deselect new graph'></form>-->
+<form id='Reload'style='display:inline' ><input type="button" value="Reload page" onclick="reloadPage()"></form>
+<form id='betw' style='display:inline'><input id='betw' type='submit' value='Find Betweenness'></form>
+
+</div>
+</div>
+
+
+
+
+ <script type='text/javascript'>
+
+
+var nodeToLis=[]
+var novadata=[] ;
+var datasss=[];
+var data1;
+var nodeId="";
+var nei=[];
+var beta;
+var alpha;
+var linkcolor=[];
+var nei44=[];
+var b=false;
+var prova=[];
+//var neihh=[];
+var deselectOpt=false;
+
+
+
+            /*global Viva*/
+
+            var nodeUI={};
+            //var graphGenerator = Viva.Graph.generator();
+            var graph = Viva.Graph.graph();
+            var graphics = Viva.Graph.View.webglGraphics();
+
+            var layout = Viva.Graph.Layout.forceDirected(graph, {
+                        springLength : 200,
+                        springCoeff : 0.0002,
+                        dragCoeff : 0.02,
+                        gravity : -1.2,
+                       // theta : 0.008,
+                        //timeStep:10,
+                       // charge:-200
+            });
+
+            var renderer = Viva.Graph.View.renderer(graph,
+                    {
+                        layout     : layout,
+                        graphics   : graphics,
+                        renderLinks : true,
+                        prerender  : true,
+                        container : document.getElementById('webgl')
+            });
+
+            var text="";
+            
+            var events = Viva.Graph.webglInputEvents(graphics, graph);
+           var a = false;
+                
+d3.json("src/data/graph2991.json", function(data1) {
+            data1=data1
+            datasss =data1.nodes;            
+            var all_data=data1.nodes;
+
+                    for (var i = 0; i < data1.nodes.length; ++i){
+                      //  console.log(data1.nodes[i].name)
+                        graph.addNode(data1.nodes[i].Symbol, {FC:data1.nodes[i].FC, Degree:data1.nodes[i].Degree} );
+                    }
+
+                    for (i = 0; i < data1.links.length; ++i){
+                        var link = data1.links[i];
+                        graph.addLink(link.source, link.target,link.source);
+                    }
+       
+
+
+
+              var nodeColor = 0xffffff, // hex rrggbb
+
+                  nodeSize = 40;
+
+              var circleNode = buildCircleNodeShader();
+                  graphics.setNodeProgram(circleNode);
+
+             // second, change the node ui model, which can be understood
+             // by the custom shader:
+              graphics.node(function (node) {
+              //console.log(graphics.node(3))
+                  return new WebglCircle(nodeSize, nodeColor); 
+               });
+
+           
+
+               
+              events.mouseEnter(function (node) {
+                    //console.log('Mouse entered node: ' + node.id);
+                  }).mouseLeave(function (node) {
+                    //console.log('Mouse left node: ' + node.id);
+                  }).dblClick(function (node) { //$("ciccio").innerTEXT(node.id)
+                  //if(graphics.getNodeUI(node.id).color===)
+                      for (var i = nodeToLis.length-1; i >= 0; i--) {
+                            if (nodeToLis[i]=== node.id) {
+                                  nodeToLis.splice(i, 1);
+                          }}
+                  
+                  if (a===false){colora(all_data,graphics)} else {
+                  colora2(nei,graphics)}
+                  if(b===true){colora2(prova,graphics)}
+                   checklist(nodeToLis,graphics);
+                  
+                  $('#ciccio').empty();
+                  $('#ciccio').append("Selected:");
+                  levaduplicati(nodeToLis);
+                    for (i in nodeToLis){ 
+                  $('#ciccio').append("\n "+nodeToLis[i]+" ");
+                  renderer.resume()
+                        }
+                   //console.log('Double click on node: ' + node.id);
+                  }).click(function (node) { 
+                    //graphics.getNodeUI(node.id).color=0xffff00;
+                    for (var i = nodeToLis.length-1; i >= 0; i--) {
+                            if (nodeToLis[i]=== node.id) {
+                                  nodeToLis.splice(i, 1);
+                          }}
+
+                    nodeToLis.push(node.id)
+
+                    levaduplicati(nodeToLis);
+                    
+                  $('#ciccio').empty();
+                  $('#ciccio').append("Selected:");
+
+
+                      
+                      checklist(nodeToLis,graphics);
+                      
+
+                      
+                    for (i in nodeToLis){ 
+                  $('#ciccio').append("\n "+nodeToLis[i]);
+                  renderer.resume()
+               
+                        }
+                 })
+
+
+                renderer.run();
+                beta=renderer;
+                alpha=graphics;
+                funz=graphics; 
+
+               
+  
+function colora(lis,ewe){
+  for (i in lis){
+      if (lis[i].FC >3){ewe.getNodeUI(lis[i].Symbol).color=0xFF0000} else
+         if (lis[i].FC>2){ ewe.getNodeUI(lis[i].Symbol).color=0xFF0055} else
+            if (lis[i].FC>1.5){ewe.getNodeUI(lis[i].Symbol).color=0xFF0099} else
+              if (lis[i].FC<-3){ewe.getNodeUI(lis[i].Symbol).color=0x00FF00} else
+                if (lis[i].FC<-2){ewe.getNodeUI(lis[i].Symbol).color=0x00CD00} else
+                  if (lis[i].FC<-1.5){ewe.getNodeUI(lis[i].Symbol).color=0x008B00} else ewe.getNodeUI(lis[i].Symbol).color = 0xffffff}
+  //for (i in data1.nodes){getNodeUI(data1.nodes[i].Symbol).size=30}
+
+ }
+
+
+
+
+if (a===false){colora(all_data,graphics)} else {
+                  colora2(nodeToLis,graphics)}
+
+  function checklist(nodeToLis,graphics){
+  for (i in nodeToLis){
+    graphics.getNodeUI(nodeToLis[i]).color=0xFFFF00;
+  }
+} 
+
+    
+ $('#res').submit(function(e){
+     e.preventDefault();
+if(deselectOpt===false){
+
+       nodeToLis=[];
+       $('#ciccio').empty();
+       $('#ciccio').append("Selected:");
+       novadata=[] 
+  if (a===false){colora(all_data,graphics)} else {
+                  colora2(nodeToLis,graphics)}
+                } 
+                else
+                {
+                    if (a===false){colora(all_data,graphics)} else {
+                  colora2(nei,graphics)}
+           //nodeToLis=[]
+           vicvic=[];
+           nodeToLis=[];
+           checklist(nodeToLis,graphics);
+             if(b===true){colora2(prova,graphics);checklist(prova,graphics);}
+           
+          // b=false;
+           $('#ciccio').empty();
+           $('#ciccio').append("Selected:");
+           renderer.resume();
+                }
+
+
+ renderer.resume()
+});
+
+ $('#centerForm').submit(function(e) {
+                    e.preventDefault();
+                    var nodeId = $('#nodeid').val().toUpperCase();
+                    graph.removeNode(nodeId);
+                    a=true;
+                    nodeToLis=prova;
+                    nei=prova;
+                    b=true;
+                    renderer.resume()
+});
+
+
+  $('#lis').submit(function(e) {
+           e.preventDefault();
+           alovic(nodeToLis)
+          renderer.resume()
+  })
+
+    $('#vicvic').submit(function(e) {
+           e.preventDefault();
+           alovic(vicvic)
+           renderer.resume()
+  })
+
+
+    $('#nuovoG').submit(function(e) {
+           e.preventDefault();
+            a=true;
+            deselectOpt=true;
+           graphalo(data1,vicvic)
+           if (a===false){colora(nei,graphics)} else {
+                  colora2(nei,graphics)}
+           nodeToLis=[]
+          
+           $('#ciccio').empty();
+           $('#ciccio').append("Selected:");
+           renderer.resume()
+  })
+
+
+    $('#color').submit(function(e) {
+           e.preventDefault();
+         
+  })
+
+
+
+
+function alo(nodeId){
+  novadata=[];
+
+  previousColor=funz.getNodeUI(nodeId).color;
+vicini=funz.getNodeUI(nodeId).node.links;
+
+linkcolor=[]
+nei=[];
+for (i in vicini){ 
+      nei.push(vicini[i].toId);
+      nei.push(vicini[i].fromId)
+      linkcolor.push(id)
+    }
+
+for (i in nei){funz.getNodeUI(nei[i]).color="0x99991";funz.getNodeUI(nei[i]).size=40} 
+for (i in linkcolor){graphics.getLinkUI(linkcolor[i].color=0xFF0000)}
+
+  funz.getNodeUI(nodeId).color=previousColor;
+//Richiama funzione per eliminare duplicati , Colpa dei link multipli 
+nei = levaduplicati(nei)
+
+
+//funzione per ricostruire dati dei vicini
+for (item in data1.nodes)
+for (i in nei){
+{ if (data1.nodes[item].Symbol===nei[i]){novadata.push(data1.nodes[item])}
+}}
+}
+
+function alovic(nodeToLis){
+  novadata=[];
+nei=[];
+linkcolor=[]
+  //previousColor=funz.getNodeUI(nodeId).color;
+  for (i in nodeToLis){
+vicini=funz.getNodeUI(nodeToLis[i]).node.links;
+
+
+
+for (i in vicini){ 
+      nei.push(vicini[i].toId);
+      nei.push(vicini[i].fromId) 
+    //  linkcolor.push(vicini[i].id)
+    }}
+
+for (i in nei){
+  //funz.getNodeUI(nei[i]).color="0x99991";
+  funz.getNodeUI(nei[i]).color=0xffff00} 
+//for (i in linkcolor){graphics.getLinkUI(linkcolor[i]).color=0xFFFFFF}
+ // funz.getNodeUI(nodeId).color=previousColor;
+//Richiama funzione per eliminare duplicati , Colpa dei link multipli 
+nei = levaduplicati(nei)
+
+
+//funzione per ricostruire dati dei vicini
+for (item in data1.nodes)
+for (i in nei){
+{ if (data1.nodes[item].Symbol===nei[i]){novadata.push(data1.nodes[item])}
+
+}}
+$('#ciccio').empty();
+$('#ciccio').append("Selected:");
+levaduplicati(nei);
+for (i in nei){ 
+$('#ciccio').append("\n "+nei[i]);}
+vicvic=nei;
+
+renderer.resume()
+}
+
+
+
+
+function graphalo(data, lis){
+
+  var alpha=data1.nodes;
+  var ausilio=[]
+    for (i in alpha){ausilio.push(alpha[i].Symbol)}
+  var diff = $(ausilio).not(nei).get();
+    for (i in diff)
+        graph.removeNode(diff[i]);
+        if (a===false){colora(all_data,graphics)} else {
+                  colora2(nei,graphics)}
+    //$("#ciccio").empty();
+    nodeToLis=[];
+    $('#ciccio').empty();
+$('#ciccio').append("Selected:");
+renderer.resume()
+}
+
+
+function creabetwen(nodeToLis){
+  var sss=[];
+ var a=apa(nodeToLis[0]);
+  var b=apa(nodeToLis[1]);
+  sss=intersect(a,b);
+  sss.push(nodeToLis[0]);
+  sss.push(nodeToLis[1])
+  var alpha=data1.nodes;
+  var ausilio=[]
+    for (i in alpha){ausilio.push(alpha[i].Symbol)}
+  var diff = $(ausilio).not(sss).get();
+    for (i in diff)
+        graph.removeNode(diff[i]);
+       renderer.resume()
+
+}
+
+
+function provaNew(nodeToLis){
+  prova=[];
+  var a=apa(nodeToLis[0]);
+  var b=apa(nodeToLis[1]);
+  for (i in a){
+    for (k in b){
+      if (a[i]===b[k]){prova.push(a[i])}
+    }
+  }
+  for (i in b){
+    for (k in a){
+      if (b[i]===a[k]){prova.push(b[i])}
+    }
+  }
+  prova.push(nodeToLis[0]);
+  prova.push(nodeToLis[1])
+var alpha=data1.nodes;
+  var ausilio=[]
+    for (i in alpha){ausilio.push(alpha[i].Symbol)}
+  var diff = $(ausilio).not(prova).get();
+    for (i in diff)
+        graph.removeNode(diff[i]);
+      a=true;
+
+
+novadata=[];
+
+
+levaduplicati(prova)
+for (item in data1.nodes)
+for (i in prova){
+{ if (data1.nodes[item].Symbol===prova[i]){novadata.push(data1.nodes[item])}}}
+
+      return prova;
+}
+ 
+
+
+
+     $('#betw').submit(function(e) {
+           e.preventDefault();
+           provaNew(nodeToLis);
+           a=true;
+            b=true; 
+            colora2(prova,graphics)
+             
+           $('#ciccio').empty();
+           $('#ciccio').append("Selected:");
+           nodeToLis=[];
+           //checklist(prova,graphics);
+           renderer.resume();
+}
+  )
+
+
+
+
+
+
+
+
+
+
+/*##################################
+######Carica la Griglia ###########
+####################################*/
+
+
+var dataView;
+var grid;
+
+data2=   data1.nodes.forEach(function(d,i) { d.id = d.id || i; });
+
+var column_keys = d3.keys(data1.nodes[0]);
+var columns = column_keys.map(function(key,i) {
+            return {
+                  id: key,
+                  name: key,
+                  field: key,
+                  sortable: true,
+
+                   }
+        });
+
+
+
+
+var options = {
+  editable: true,
+  enableAddRow: true,
+  enableCellNavigation: true,
+  asyncEditorLoading: true,
+  forceFitColumns: false,
+  topPanelHeight: 25,
+  minWidth:70
+};
+
+var sortcol = "Symbol";
+var sortdir = 1;
+var percentCompleteThreshold = 0;
+var searchString = "";
+
+function requiredFieldValidator(value) {
+  if (value == null || value == undefined || !value.length) {
+    return {valid: false, msg: "This is a required field"};
+  }
+  else {
+    return {valid: true, msg: null};
+  }
+}
+
+function myFilter(item, args) {
+  if (item["percentComplete"] < args.percentCompleteThreshold) {
+    return false;
+  }
+
+  if (args.searchString != "" && item["Symbol"].indexOf(args.searchString) == -1) {
+    return false;
+  }
+
+  return true;
+}
+
+function percentCompleteSort(a, b) {
+  return a["percentComplete"] - b["percentComplete"];
+}
+
+function comparer(a, b) {
+  var x = a[sortcol], y = b[sortcol];
+  return (x == y ? 0 : (x > y ? 1 : -1));
+}
+
+function toggleFilterRow() {
+  grid.setTopPanelVisibility(!grid.getOptions().showTopPanel);
+}
+
+
+$(".grid-header .ui-icon")
+        .addClass("ui-state-default ui-corner-all")
+        .mouseover(function (e) {
+          $(e.target).addClass("ui-state-hover")
+        })
+        .mouseout(function (e) {
+          $(e.target).removeClass("ui-state-hover")
+        });
+
+
+$(function () {
+
+  dataView = new Slick.Data.DataView({ inlineFilters: true });
+  grid = new Slick.Grid("#myGrid", dataView, columns, options);
+  grid.setSelectionModel(new Slick.RowSelectionModel());
+
+  var pager = new Slick.Controls.Pager(dataView, grid, $("#pager"));
+  var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
+
+
+  // move the filter panel defined in a hidden div into grid top panel
+  $("#inlineFilterPanel")
+      .appendTo(grid.getTopPanel())
+      .show();
+
+  grid.onCellChange.subscribe(function (e, args) {
+    dataView.updateItem(args.item.id, args.item);
+  });
+
+
+
+  grid.onKeyDown.subscribe(function (e) {
+    // select all rows on ctrl-a
+    if (e.which != 65 || !e.ctrlKey) {
+      return false;
+    }
+
+    var rows = [];
+    for (var i = 0; i < dataView.getLength(); i++) {
+      rows.push(i);
+    }
+
+    grid.setSelectedRows(rows);
+    e.preventDefault();
+  });
+
+  grid.onSort.subscribe(function (e, args) {
+    sortdir = args.sortAsc ? 1 : -1;
+    sortcol = args.sortCol.field;
+
+    if ($.browser.msie && $.browser.version <= 8) {
+      // using temporary Object.prototype.toString override
+      // more limited and does lexicographic sort only by default, but can be much faster
+
+      var percentCompleteValueFn = function () {
+        var val = this["percentComplete"];
+        if (val < 10) {
+          return "00" + val;
+        } else if (val < 100) {
+          return "0" + val;
+        } else {
+          return val;
+        }
+      };
+
+      // use numeric sort of % and lexicographic for everything else
+      dataView.fastSort((sortcol == "percentComplete") ? percentCompleteValueFn : sortcol, args.sortAsc);
+    } else {
+      // using native sort with comparer
+      // preferred method but can be very slow in IE with huge datasets
+      dataView.sort(comparer, args.sortAsc);
+    }
+  });
+
+  // wire up model events to drive the grid
+  dataView.onRowCountChanged.subscribe(function (e, args) {
+    grid.updateRowCount();
+    grid.render();
+  });
+
+  dataView.onRowsChanged.subscribe(function (e, args) {
+    grid.invalidateRows(args.rows);
+    grid.render();
+  });
+
+  dataView.onPagingInfoChanged.subscribe(function (e, pagingInfo) {
+    var isLastPage = pagingInfo.pageNum == pagingInfo.totalPages - 1;
+    var enableAddRow = isLastPage || pagingInfo.pageSize == 0;
+    var options = grid.getOptions();
+
+    if (options.enableAddRow != enableAddRow) {
+      grid.setOptions({enableAddRow: enableAddRow});
+    }
+  });
+
+
+  var h_runfilters = null;
+
+  // wire up the slider to apply the filter to the model
+  $("#pcSlider,#pcSlider2").slider({
+    "range": "min",
+    "slide": function (event, ui) {
+      Slick.GlobalEditorLock.cancelCurrentEdit();
+
+      if (percentCompleteThreshold != ui.value) {
+        window.clearTimeout(h_runfilters);
+        h_runfilters = window.setTimeout(updateFilter, 10);
+        percentCompleteThreshold = ui.value;
+      }
+    }
+  });
+
+
+//funzione per la ricerca del gene al passaggio del mouse
+events.mouseEnter(function (node) { searchString = node.id
+    updateFilter();
+                   // console.log('Mouse entered node: ' + node.id);
+                }).mouseLeave(function (node) {
+                   // console.log('Mouse left node: ' + node.id);
+  // wire up the search textbox to apply the filter to the model
+    searchString = "";
+    updateFilter();
+  });
+
+
+  // wire up the search textbox to apply the filter to the model
+  $("#txtSearch,#txtSearch2").keyup(function (e) {
+    Slick.GlobalEditorLock.cancelCurrentEdit();
+
+    // clear on Esc
+    if (e.which == 27) {
+      this.value = "";
+    }
+
+    searchString = (this.value).toUpperCase();
+    updateFilter();
+  });
+
+  function updateFilter() {
+    dataView.setFilterArgs({
+      percentCompleteThreshold: percentCompleteThreshold,
+      searchString: searchString
+    });
+    dataView.refresh();
+  }
+
+  $("#btnSelectRows").click(function () {
+    if (!Slick.GlobalEditorLock.commitCurrentEdit()) {
+      return;
+    }
+
+    var rows = [];
+    for (var i = 0; i < 10 && i < dataView.getLength(); i++) {
+      rows.push(i);
+    }
+
+    grid.setSelectedRows(rows);
+  });
+
+
+  // initialize the model after all the events have been hooked up
+  dataView.beginUpdate();
+  dataView.setItems(data1.nodes);
+  dataView.setFilterArgs({
+    percentCompleteThreshold: percentCompleteThreshold,
+    searchString: searchString
+  });
+  dataView.setFilter(myFilter);
+  dataView.endUpdate();
+
+  // if you don't want the items that are not visible (due to being filtered out
+  // or being on a different page) to stay selected, pass 'false' to the second arg
+  dataView.syncGridSelection(grid, true);
+
+
+
+grid.onClick.subscribe(function(e, args) {
+
+  var item = dataView.getItem(args.row);
+      //console.log(dataView.getItem(args.row).Symbol)
+      nom=item.Symbol;
+      nodeToLis.push(nom);
+               if (a===false){colora(all_data,graphics)} else {
+                  colora2(nei,graphics)}       
+       checklist2(nodeToLis,graphics);
+//checklist(vicvic);
+      $('#ciccio').append('\n '+nom);
+      
+//funz.getNodeUI(nom).color=0xfff00; 
+      renderer.resume()
+              
+        })
+                                            
+                            
+    grid.onDblClick.subscribe(function(e, args) {
+
+  var item = dataView.getItem(args.row);
+      //console.log(dataView.getItem(args.row).Symbol)
+      nom=item.Symbol;
+      for (var i = nodeToLis.length-1; i >= 0; i--) {
+                      if (nodeToLis[i]=== nom) {
+                           nodeToLis.splice(i, 1);
+                  }}
+                  
+                  //colora(nodeToLis,graphics);
+                  if (a===false){colora(all_data,graphics)} else {
+                  colora2(nodeToLis,graphics)}
+                  if(b===true){colora2(prova,graphics)}
+                  checklist2(nodeToLis,graphics);
+                  //checklist(vicvic,graphics);
+                  $('#ciccio').empty();
+                  $('#ciccio').append("Selected:");
+                  levaduplicati(nodeToLis);
+                  for (i in nodeToLis){ 
+                  $('#ciccio').append("\n"+nodeToLis[i]);
+                  }
+renderer.resume()
+                  })
+    
+})
+
+})
+
+function toggle() {
+  var ele = document.getElementById("toggleText");
+  var text = document.getElementById("displayText");
+  if(ele.style.display == "block") {
+        ele.style.display = "none";
+    text.innerHTML = "show";
+    }
+  else {
+    ele.style.display = "block";
+    text.innerHTML = "hide";
+  }
+} 
+
+function DownloadJSON2CSV(objArray)
+{
+    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+    var str = '';
+     
+    for (var i = 0; i < array.length; i++) {
+        var line = '';
+        for (var index in array[i]) {
+            if(line != '') line += ','
+         
+            line += array[i][index];
+        }
+ 
+        str += line + '\r\n';
+    }
+ 
+    if (navigator.appName != 'Microsoft Internet Explorer')
+    {
+        window.open('data:text/csv;charset=utf-8,' + escape(str));
+    }
+    else
+    {
+        var popup = window.open('','csv','');
+        popup.document.body.innerHTML = '<pre>' + str + '</pre>';
+    }          
+}
+
+                $('.zoom').click(function (e) {
+                    e.preventDefault();
+                    if ($(this).hasClass('in')) {
+                        renderer.zoomIn();
+                    } else {
+                        renderer.zoomOut();
+                    }
+                });
+
+         
+
+  function checklist2(lis,rrr){
+  for (i in lis){
+    rrr.getNodeUI(lis[i]).color=0xffff00;
+  }
+}
+
+
+function gridneigh(data){
+
+var dataView;
+var grid;
+gras=graphics;
+
+data1=   data.forEach(function(d,i) { d.id = d.id || i; });
+
+var column_keys = d3.keys(data[0]);
+var columns = column_keys.map(function(key,i) {
+            return {
+                  id: key,
+                  name: key,
+                  field: key,
+                  sortable: true,
+
+                   }
+        });
+
+
+
+
+var options = {
+  editable: true,
+  enableAddRow: true,
+  enableCellNavigation: true,
+  asyncEditorLoading: true,
+  forceFitColumns: false,
+  topPanelHeight: 25,
+  minWidth:70
+};
+
+var sortcol = "Gene.Symbol";
+var sortdir = 1;
+var percentCompleteThreshold = 0;
+var searchString = "";
+
+function requiredFieldValidator(value) {
+  if (value == null || value == undefined || !value.length) {
+    return {valid: false, msg: "This is a required field"};
+  }
+  else {
+    return {valid: true, msg: null};
+  }
+}
+
+function myFilter(item, args) {
+  if (item["percentComplete"] < args.percentCompleteThreshold) {
+    return false;
+  }
+
+  if (args.searchString != "" && item["Symbol"].indexOf(args.searchString) == -1) {
+    return false;
+  }
+
+  return true;
+}
+
+function percentCompleteSort(a, b) {
+  return a["percentComplete"] - b["percentComplete"];
+}
+
+function comparer(a, b) {
+  var x = a[sortcol], y = b[sortcol];
+  return (x == y ? 0 : (x > y ? 1 : -1));
+}
+
+function toggleFilterRow() {
+  grid.setTopPanelVisibility(!grid.getOptions().showTopPanel);
+}
+
+
+$(".grid-header .ui-icon")
+        .addClass("ui-state-default ui-corner-all")
+        .mouseover(function (e) {
+          $(e.target).addClass("ui-state-hover")
+        })
+        .mouseout(function (e) {
+          $(e.target).removeClass("ui-state-hover")
+        });
+
+
+$(function () {
+
+  dataView = new Slick.Data.DataView({ inlineFilters: true });
+  grid = new Slick.Grid("#myGrid", dataView, columns, options);
+  grid.setSelectionModel(new Slick.RowSelectionModel());
+
+  var pager = new Slick.Controls.Pager(dataView, grid, $("#pager"));
+  var columnpicker = new Slick.Controls.ColumnPicker(columns, grid, options);
+
+
+  // move the filter panel defined in a hidden div into grid top panel
+  $("#inlineFilterPanel")
+      .appendTo(grid.getTopPanel())
+      .show();
+
+  grid.onCellChange.subscribe(function (e, args) {
+    dataView.updateItem(args.item.id, args.item);
+  });
+
+
+
+  grid.onKeyDown.subscribe(function (e) {
+    // select all rows on ctrl-a
+    if (e.which != 65 || !e.ctrlKey) {
+      return false;
+    }
+
+    var rows = [];
+    for (var i = 0; i < dataView.getLength(); i++) {
+      rows.push(i);
+    }
+
+    grid.setSelectedRows(rows);
+    e.preventDefault();
+  });
+
+  grid.onSort.subscribe(function (e, args) {
+    sortdir = args.sortAsc ? 1 : -1;
+    sortcol = args.sortCol.field;
+
+    if ($.browser.msie && $.browser.version <= 8) {
+      // using temporary Object.prototype.toString override
+      // more limited and does lexicographic sort only by default, but can be much faster
+
+      var percentCompleteValueFn = function () {
+        var val = this["percentComplete"];
+        if (val < 10) {
+          return "00" + val;
+        } else if (val < 100) {
+          return "0" + val;
+        } else {
+          return val;
+        }
+      };
+
+      // use numeric sort of % and lexicographic for everything else
+      dataView.fastSort((sortcol == "percentComplete") ? percentCompleteValueFn : sortcol, args.sortAsc);
+    } else {
+      // using native sort with comparer
+      // preferred method but can be very slow in IE with huge datasets
+      dataView.sort(comparer, args.sortAsc);
+    }
+  });
+
+  // wire up model events to drive the grid
+  dataView.onRowCountChanged.subscribe(function (e, args) {
+    grid.updateRowCount();
+    grid.render();
+  });
+
+  dataView.onRowsChanged.subscribe(function (e, args) {
+    grid.invalidateRows(args.rows);
+    grid.render();
+  });
+
+  dataView.onPagingInfoChanged.subscribe(function (e, pagingInfo) {
+    var isLastPage = pagingInfo.pageNum == pagingInfo.totalPages - 1;
+    var enableAddRow = isLastPage || pagingInfo.pageSize == 0;
+    var options = grid.getOptions();
+
+    if (options.enableAddRow != enableAddRow) {
+      grid.setOptions({enableAddRow: enableAddRow});
+    }
+  });
+
+
+  var h_runfilters = null;
+
+  // wire up the slider to apply the filter to the model
+  $("#pcSlider,#pcSlider2").slider({
+    "range": "min",
+    "slide": function (event, ui) {
+      Slick.GlobalEditorLock.cancelCurrentEdit();
+
+      if (percentCompleteThreshold != ui.value) {
+        window.clearTimeout(h_runfilters);
+        h_runfilters = window.setTimeout(updateFilter, 10);
+        percentCompleteThreshold = ui.value;
+      }
+    }
+  });
+
+//funzione per la ricerca del gene al passaggio del mouse
+events.mouseEnter(function (node) { searchString = node.id
+    updateFilter();
+                   // console.log('Mouse entered node: ' + node.id);
+                }).mouseLeave(function (node) {
+                   // console.log('Mouse left node: ' + node.id);
+  // wire up the search textbox to apply the filter to the model
+    searchString = "";
+    updateFilter();
+  });
+
+
+  // wire up the search textbox to apply the filter to the model
+  $("#txtSearch,#txtSearch2").keyup(function (e) {
+    Slick.GlobalEditorLock.cancelCurrentEdit();
+
+    // clear on Esc
+    if (e.which == 27) {
+      this.value = "";
+    }
+
+    searchString = (this.value).toUpperCase();
+    updateFilter();
+  });
+
+  function updateFilter() {
+    dataView.setFilterArgs({
+      percentCompleteThreshold: percentCompleteThreshold,
+      searchString: searchString
+    });
+    dataView.refresh();
+  }
+
+  $("#btnSelectRows").click(function () {
+    if (!Slick.GlobalEditorLock.commitCurrentEdit()) {
+      return;
+    }
+
+    var rows = [];
+    for (var i = 0; i < 10 && i < dataView.getLength(); i++) {
+      rows.push(i);
+    }
+
+    grid.setSelectedRows(rows);
+  });
+
+
+  // initialize the model after all the events have been hooked up
+  dataView.beginUpdate();
+  dataView.setItems(data);
+  dataView.setFilterArgs({
+    percentCompleteThreshold: percentCompleteThreshold,
+    searchString: searchString
+  });
+  dataView.setFilter(myFilter);
+  dataView.endUpdate();
+
+  // if you don't want the items that are not visible (due to being filtered out
+  // or being on a different page) to stay selected, pass 'false' to the second arg
+  dataView.syncGridSelection(grid, true);
+
+
+grid.onClick.subscribe(function(e, args) {
+
+  var item = dataView.getItem(args.row);
+      //console.log(dataView.getItem(args.row).Symbol)
+      nom=item.Symbol;
+      nodeToLis.push(nom);
+      
+                        
+      checklist2(nodeToLis,graphics);
+      $('#ciccio').append('\n '+nom);
+      
+//funz.getNodeUI(nom).color=0xfff00; 
+      renderer.resume()
+              
+        })
+                                            
+                            
+    grid.onDblClick.subscribe(function(e, args) {
+
+  var item = dataView.getItem(args.row);
+      //console.log(dataView.getItem(args.row).Symbol)
+      nom=item.Symbol;
+      for (var i = nodeToLis.length-1; i >= 0; i--) {
+                      if (nodeToLis[i]=== nom) {
+                           nodeToLis.splice(i, 1);
+                  }}
+                  
+                  if (a===false){colora(all_data,graphics)} else {
+                  colora2(nei,graphics)}
+                  if(b===true){colora2(prova,graphics)}
+                  checklist2(nodeToLis,graphics);
+
+                  $('#ciccio').empty();
+                  $('#ciccio').append("Selected Gene:")
+                  levaduplicati(nodeToLis);
+                    for (i in nodeToLis){ 
+
+                        $('#ciccio').append("\n "+nodeToLis[i]);
+                        renderer.resume()
+                    }
+      
+//funz.getNodeUI(nom).color=nodeColor; 
+              
+        })
+    
+  $("#gridContainer").resizable();
+
+})}
+
+//console.log(datasss)
+
+apa=function findnei(nodeId){
+var neihh=[];
+firstnei=graphics.getNodeUI(nodeId).node.links;
+for (i in firstnei){ 
+      neihh.push(firstnei[i].toId);
+      neihh.push(firstnei[i].fromId)
+      //linkcolor.push(id)
+    }
+    neihh = levaduplicati(neihh)
+    return neihh}
+
+
+ function betweeness(a,b){
+  var ausilio1=[];
+  var ausilio2=[];
+  var betw=[]
+  for (i in a){ausilio1.push(a[i])}
+  for (i in b){ausilio2.push(b[i])}
+  var differenza = $(ausilio1).not(ausilio2).get();
+var diff2 = $(ausilio2).not(ausilio1).get();
+for (i in differenza){betw.push(differenza[i])}
+for (i in diff2){betw.push(diff2[i])}
+console.log(betw)
+
+return betw
+
+}
+
+function colora2(lis,graphics){
+for (i in lis){
+      if (graphics.getNodeUI(lis[i]).node.data.FC >3){graphics.getNodeUI(lis[i]).color=0xFF0000} else
+         if (graphics.getNodeUI(lis[i]).node.data.FC>2){ graphics.getNodeUI(lis[i]).color=0xFF0055} else
+            if (graphics.getNodeUI(lis[i]).node.data.FC>1.5){graphics.getNodeUI(lis[i]).color=0xFF0099} else
+              if (graphics.getNodeUI(lis[i]).node.data.FC<-3){graphics.getNodeUI(lis[i]).color=0x00FF00} else
+                if (graphics.getNodeUI(lis[i]).node.data.FC<-2){graphics.getNodeUI(lis[i]).color=0x00CD00} else
+                  if (graphics.getNodeUI(lis[i]).node.data.FC<-1.5){graphics.getNodeUI(lis[i]).color=0x008B00} else 
+                        graphics.getNodeUI(lis[i]).color = 0xffffff}
+   }
+   
+function intersect(array1, array2) {
+   var result = [];
+   // Don't destroy the original arrays
+   var a = array1.slice(0);
+   var b = array2.slice(0);
+   var aLast = a.length - 1;
+   var bLast = b.length - 1;
+   while (aLast >= 0 && bLast >= 0) {
+      if (a[aLast] > b[bLast] ) {
+         a.pop();
+         aLast--;
+      } else if (a[aLast] < b[bLast] ){
+         b.pop();
+         bLast--;
+      } else /* they're equal */ {
+         result.push(a.pop());
+         b.pop();
+         aLast--;
+         bLast--;
+      }
+   }
+   return result;
+}
+
+
+function intersect_all(lists)
+{
+    if (lists.length == 0) return [];
+    else if (lists.length == 1) return lists[0];
+
+    var partialInt = lists[0];
+    for (var i = 1; i < lists.length; i++)
+    {
+        partialInt = intersect(partialInt, lists[i]);
+    }
+    return partialInt;
+}
+
+function reloadPage()
+  {
+  location.reload();
+  }
+
+
+        </script>
+
+
+    </body>
+</html>
