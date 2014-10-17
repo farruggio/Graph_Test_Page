@@ -14,7 +14,7 @@ http://farruggio.github.io/Graph_Test_Page/
 
 HowTo
 
-https://github.com/farruggio/Prova/blob/master/HowTo/README.md
+https://github.com/farruggio/Graph_Protein_Code_Explaination/blob/master/HowTo/README.md
 
 
 =============
